@@ -5,7 +5,7 @@ MAINTAINER Person Sebastien <personseb@yahoo.fr>
 ENV DEBIAN_FRONTEND noninteractive
 
 # see http://www.garron.me/en/blog/ubuntu-deb-proxy-cache.html
-RUN echo 'Acquire::http { Proxy "http://192.168.0.32:3142"; };' > /etc/apt/apt.conf.d/use-local-proxy
+#RUN echo 'Acquire::http { Proxy "http://192.168.0.32:3142"; };' > /etc/apt/apt.conf.d/use-local-proxy
 
 RUN apt-get -qq update
 
