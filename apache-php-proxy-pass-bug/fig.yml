@@ -1,0 +1,5 @@
+proxybug:
+  build: .
+  ports:
+    - "80:80"
+    - "81:81"
