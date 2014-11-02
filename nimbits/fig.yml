@@ -1,0 +1,5 @@
+---
+nimbits:
+  build: .
+  ports: 
+    - "8181:8080"
