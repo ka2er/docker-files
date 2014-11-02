@@ -1,0 +1,5 @@
+---
+theThingService:
+  build: .
+  ports:
+    - "1234:8888"
