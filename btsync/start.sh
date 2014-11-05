@@ -3,7 +3,7 @@
 set -e
 
 ## update timezone
-[ -z "$LOCAL_TZ" ] && echo "Using $LOCAL_TZ as current TimeZone" && echo "$LOCAL_TZ" > /etc/timezone && dpkg-reconfigure --frontend noninteractive tzdata
+[ -n "$LOCAL_TZ" ] && echo "Using $LOCAL_TZ as current TimeZone" && echo "$LOCAL_TZ" > /etc/timezone && dpkg-reconfigure --frontend noninteractive tzdata
 
 [ ! -L /.sync ] && ln -sf /data /.sync
 
