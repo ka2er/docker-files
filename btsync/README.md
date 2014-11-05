@@ -24,3 +24,8 @@ Sync protocol UDP port.
 
 WebUI port.
 
+## Environment Variables
+
+### `LOCAL_TZ`
+
+Local Timezone to use (ex: 'Europe/Paris')
