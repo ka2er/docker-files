@@ -8,3 +8,5 @@ RUN unzip rompr.zip
 RUN rm -rf rompr.zip
 RUN chown -R www-data .
 RUN docker-php-ext-install mbstring
+
+VOLUME /son
