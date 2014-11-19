@@ -10,5 +10,5 @@ RUN chown -R www-data .
 RUN docker-php-ext-install mbstring
 
 # ensure www-data has access to file from volume if file are mapped as uid/gid 1000/1000
-RUN useradd -G users www-data
+RUN usermod -G users www-data
 VOLUME /mnt/samba/son
