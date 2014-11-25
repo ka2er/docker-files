@@ -1,0 +1,72 @@
+server {
+
+    listen 80;
+    # Don't enable the next line on a Raspberry Pi
+    #listen [::]:80 default_server ipv6only=on;
+
+    server_name DomotiGa;
+    root   /domotiyii/domotiyii;
+    set $yii_bootstrap "index.php";
+
+    charset utf-8;
+
+    location / {
+        index  index.html index.php;
+        try_files $uri $uri/ /$yii_bootstrap?$args;
+
+        location ~ ^/(protected|framework|themes/\w+/views) {
+            deny  all;
+        }
+
+        #avoid processing of calls to unexisting static files by yii
+        location ~ \.(js|css|png|jpg|gif|swf|ico|pdf|mov|fla|zip|rar|txt)$ {
+            try_files $uri =404;
+            #For production servers you can set expires header with a long period
+            #expires 3M;
+        }
+
+        # pass the PHP scripts to FastCGI server listening on unix:/var/run/php5-fpm.sock
+        #
+        location ~ \.php {
+            fastcgi_split_path_info  ^(.+\.php)(.*)$;
+            # NOTE: You should have "cgi.fix_pathinfo = 0" in php.ini
+
+            #let yii catch the calls to unexising PHP files
+            set $fsn /$yii_bootstrap;
+            if (-f $document_root$fastcgi_script_name){
+                set $fsn $fastcgi_script_name;
+            }
+
+            fastcgi_pass unix:/var/run/php5-fpm.sock;
+            include fastcgi_params;
+
+            fastcgi_param  SCRIPT_FILENAME  $document_root$fsn;
+
+            #PATH_INFO and PATH_TRANSLATED can be omitted, but RFC 3875 specifies them for CGI
+            fastcgi_param  PATH_INFO        $fastcgi_path_info;
+            fastcgi_param  PATH_TRANSLATED  $document_root$fsn;
+        }
+
+        location ~ /\.(ht|git) {
+            deny  all;
+        }
+
+    }
+
+    # pass the PHP scripts to FastCGI server listening on unix:/var/run/php5-fpm.sock for other sub dirs
+    location ~ \.php {
+        fastcgi_split_path_info  ^(.+\.php)(.*)$;
+        # NOTE: You should have "cgi.fix_pathinfo = 0;" in php.ini
+
+        fastcgi_pass unix:/var/run/php5-fpm.sock;
+        include fastcgi_params;
+    }
+
+    # Also serve the rrd graphs
+    location /graphs {
+        root  /root/domotiga/rrd/graphs;
+        autoindex on;
+        rewrite ^/graphs(/.*\.png)$ $1 break;
+        rewrite ^/graphs/?$ / break;
+    }
+}
