@@ -22,11 +22,12 @@ Volumes
 -------
 
 `/dev/bus/usb`
+`/dev/serial`
 
 Run
 ---
 
 Assuming your USB device is available with drivers working etc on the host in /dev/bus/usb, you can mount this in the container using privileged mode and the volumes option. For example:
 
-`docker run -t -i -privileged -v /dev/bus/usb:/dev/bus/usb ka2er/domotiga` 
+`docker run -t -i -privileged -v /dev/serial:/dev/serial -v /dev/bus/usb:/dev/bus/usb ka2er/domotiga` 
 
