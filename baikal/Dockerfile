@@ -13,3 +13,4 @@ RUN chown -R www-data .
 RUN apt-get remove -y unzip
 
 VOLUME /var/www/html/Specific
+EXPOSE 80
