@@ -1,6 +1,8 @@
 FROM php:5.6-apache
 
 RUN apt-get update
+RUN docker-php-ext-install mbstring
+
 RUN apt-get install -y git
 
 WORKDIR /var/www/html/
