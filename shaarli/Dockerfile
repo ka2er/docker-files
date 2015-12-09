@@ -17,4 +17,8 @@ RUN git clone https://github.com/shaarli/Shaarli.git /var/www/html
 RUN chown -R www-data .
 RUN apt-get remove -y git
 
+## fix missing default timezone config
+COPY php.ini /usr/local/etc/php/
+
+
 VOLUME /var/www/html/data
