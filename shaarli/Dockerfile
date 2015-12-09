@@ -12,7 +12,6 @@ RUN apt-get install -y git \
     && docker-php-ext-install gd
     
 WORKDIR /var/www/html/
-RUN rm index.html
 RUN git clone https://github.com/shaarli/Shaarli.git /var/www/html
 RUN chown -R www-data .
 RUN apt-get remove -y git
