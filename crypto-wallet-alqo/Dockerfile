@@ -26,7 +26,7 @@ ENV HOME_DIR         /usr/local/bin
 RUN mkdir -p /opt/code/ && cd /opt/code/ && git clone ${GIT_URL} ${PROJECT} && cd /opt/code/${PROJECT} && ./autogen.sh \
 	&& ./configure --enable-tests=no --with-incompatible-bdb --enable-glibc-back-compat --with-gui=no \
 #CFLAGS="-march=native" LIBS="-lcurl -lssl -lcrypto -lz" \
-	&& make -j4 && make installa \
+	&& make -j4 && make install \
 	&& rm -rf /opt/code/
 
 # __ EOI __
